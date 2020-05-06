@@ -7,7 +7,7 @@ function createStore(reducer) {
   // 2. Get the state.
   // 3. Listen to changes on the state.
   // 4. Update the state
-  
+
 	let state
 	let listeners = []
 
@@ -43,4 +43,19 @@ function todos (state = [], action) {
   return state
 }
 
+
+const store = createStore(todos)
+
+store.subscribe(() => {
+	console.log('The new state is: ',store.getState())
+})
+
+store.dispatch({
+	type: 'ADD_TODO',
+	todo: {
+		id: 0,
+		name: 'Redux',
+		complete: false
+	}
+})
 
