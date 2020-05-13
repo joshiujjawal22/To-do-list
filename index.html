@@ -10,6 +10,8 @@
   <script src='https://unpkg.com/babel-standalone@6.15.0/babel.min.js'></script>
                                 <!-- API -->
   <script src="https://tylermcginnis.com/goals-todos-api/index.js"></script>
+                                <!-- Thunk -->
+  <script src="https://unpkg.com/redux-thunk@2.2.0/dist/redux-thunk.min.js"></script>
 
 	
 </head>
@@ -75,6 +77,19 @@
         type: RECEIVE_DATA,
         todos,
         goals,
+      }
+    }
+
+
+    function handleDeleteTodo (todo) {
+      return (dispatch) => {
+        dispatch(removeTodoAction(todo.id))
+
+        return API.deleteTodo(todo.id)
+          .catch(() => {
+            dispatch(addTodoAction(todo))
+            alert('An error occurred. Try again.')
+          })
       }
     }
 
@@ -149,7 +164,8 @@
     	todos,
     	goals,
       loading,
-    }), Redux.applyMiddleware(checker,logger))
+    }), 
+    Redux.applyMiddleware(ReduxThunk.default, checker, logger))
 
     
   </script>
@@ -192,13 +208,7 @@
 
 
       removeItem = (todo) => {
-        this.props.store.dispatch(removeTodoAction(todo.id))
-
-        return API.deleteTodo(todo.id)
-          .catch(() => {
-            this.props.store.dispatch(addTodoAction(todo))
-            alert('An error occurred. Try again.')
-          })
+        this.props.store.dispatch(handleDeleteTodo(todo))
 
       }
 
