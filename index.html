@@ -296,7 +296,7 @@
     }
 
     const ConnectedTodos =
-    connect((state) => ({
+    ReactRedux.connect((state) => ({
     todos: state.todos
     }))(Todos)
       
@@ -341,7 +341,7 @@
     }
 
     const ConnectedGoals = 
-    connect((state) => ({
+    ReactRedux.connect((state) => ({
     goals: state.goals
     }))(Goals)
 
@@ -369,7 +369,7 @@
       }
     }
 
-    const ConnectedApp = connect((state) => ({
+    const ConnectedApp = ReactRedux.connect((state) => ({
     loading: state.loading
     }))(App)
 
@@ -416,22 +416,10 @@
           }
         }
 
-    const Context = React.createContext()
-
-    class Provider extends React.Component {
-      render () {
-        return (
-          <Context.Provider value={this.props.store}>
-            {this.props.children}
-          </Context.Provider>
-        )
-      }
-    }
-
     ReactDOM.render(
-      <Provider store={store}>
+      <ReactRedux.Provider store={store}>
         <ConnectedApp />
-      </Provider>,
+      </ReactRedux.Provider>,
       document.getElementById('app')
     )
   </script>
