@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function List (props) {
   return (
-    <ul>
+    <ul style={{color:'green',fontWeight:'bolder',fontSize:'20px'}}>
       {props.items.map((item) => (
         <li key={item.id}>
           <span
