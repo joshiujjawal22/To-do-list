@@ -20,7 +20,7 @@ class Goals extends React.Component {
   render() {
     return (
       <div>
-        <h1>Goals</h1>
+        <h1 className="heading">Goals</h1>
         <input
           type='text'
           placeholder='Add Goal'

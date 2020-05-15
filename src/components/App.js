@@ -15,7 +15,7 @@ class App extends React.Component {
 
 		render() {
 			if (this.props.loading === true) {
-		      return <h3>Loading</h3>
+		      return <h3 className="load">Loading</h3>
 		    }
 		    return (
 		    	<div>
